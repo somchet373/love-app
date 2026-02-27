@@ -1,347 +1,410 @@
 <!doctype html>
 <html lang="th">
-<head>
-<meta charset="UTF-8" />
-<title>Love App 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Love App 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ffc0cb, #ff99cc);
-  text-align: center;
-  overflow-x: hidden;
-}
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ffc0cb, #ff99cc);
+        text-align: center;
+        overflow-x: hidden;
+      }
 
-h1 { color: white; margin-top: 30px; }
+      h1 {
+        color: white;
+        margin-top: 30px;
+      }
 
-.loveText {
-  color: white;
-  font-size: 26px;
-  animation: pop 0.8s ease;
-}
+      .loveText {
+        color: white;
+        font-size: 26px;
+        animation: pop 0.8s ease;
+      }
 
-.loveSub {
-  color: #fff0f5;
-  font-size: 18px;
-  margin-top: -10px;
-  animation: pop 1s ease;
-}
+      .loveSub {
+        color: #fff0f5;
+        font-size: 18px;
+        margin-top: -10px;
+        animation: pop 1s ease;
+      }
 
-@keyframes pop {
-  0% { transform: scale(0.5); opacity: 0; }
-  70% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
-}
+      @keyframes pop {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        70% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
 
-button {
-  background: white;
-  color: #ff4da6;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 10px;
-}
+      button {
+        background: white;
+        color: #ff4da6;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 10px;
+      }
 
-button:hover { background: #ffe6f2; }
+      button:hover {
+        background: #ffe6f2;
+      }
 
-#gallery { margin-top: 20px; }
+      #gallery {
+        margin-top: 20px;
+      }
 
-.image-container {
-  position: relative;
-  display: inline-block;
-  margin: 12px;
-  border-radius: 20px;
-  overflow: hidden;
-}
+      .image-container {
+        position: relative;
+        display: inline-block;
+        margin: 12px;
+        border-radius: 20px;
+        overflow: hidden;
+      }
 
-.image-container img {
-  display: block;
-  width: 220px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-}
+      .image-container img {
+        display: block;
+        width: 220px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
 
-.delete-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,0,0,0.9);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      .delete-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 0, 0, 0.9);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-@media (hover: hover) {
-  .delete-btn { opacity: 0; }
-  .image-container:hover .delete-btn { opacity: 1; }
-}
+      @media (hover: hover) {
+        .delete-btn {
+          opacity: 0;
+        }
+        .image-container:hover .delete-btn {
+          opacity: 1;
+        }
+      }
 
-@media (hover: none) {
-  .delete-btn { opacity: 1; }
-}
+      @media (hover: none) {
+        .delete-btn {
+          opacity: 1;
+        }
+      }
 
-.delete-btn:active {
-  transform: scale(0.9);
-}
+      .delete-btn:active {
+        transform: scale(0.9);
+      }
 
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-110vh); opacity: 0; }
-}
+      @keyframes floatUp {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-110vh);
+          opacity: 0;
+        }
+      }
 
-.heart {
-  position: fixed;
-  bottom: -30px;
-  pointer-events: none;
-  z-index: 9999;
-}
-</style>
-</head>
+      .heart {
+        position: fixed;
+        bottom: -30px;
+        pointer-events: none;
+        z-index: 9999;
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
+    <audio id="bgMusic" loop>
+      <source src="love.mp3" type="audio/mpeg" />
+    </audio>
 
-<audio id="bgMusic" loop>
-  <source src="love.mp3" type="audio/mpeg" />
-</audio>
+    <h1>Album 💖</h1>
 
-<h1>Album 💖</h1>
+    <h2 id="loveDuration" class="loveText"></h2>
+    <h3 id="anniversaryCountdown" class="loveSub"></h3>
 
-<h2 id="loveDuration" class="loveText"></h2>
-<h3 id="anniversaryCountdown" class="loveSub"></h3>
+    <input type="file" id="fileInput" />
+    <br />
+    <button onclick="uploadImage()">อัปโหลดรูป 💕</button>
 
-<input type="file" id="fileInput" />
-<br />
-<button onclick="uploadImage()">อัปโหลดรูป 💕</button>
+    <div id="gallery"></div>
 
-<div id="gallery"></div>
+    <h2 style="color: white; margin-top: 40px">💌 จดหมายถึงกัน</h2>
 
-<h2 style="color:white;margin-top:40px;">💌 จดหมายถึงกัน</h2>
+    <input
+      id="authorInput"
+      placeholder="ชื่อคนเขียน..."
+      style="
+        width: 80%;
+        max-width: 400px;
+        padding: 10px;
+        border-radius: 20px;
+        border: none;
+        margin-bottom: 10px;
+      "
+    />
 
-<input 
-  id="authorInput" 
-  placeholder="ชื่อคนเขียน..." 
-  style="width:80%;max-width:400px;padding:10px;border-radius:20px;border:none;margin-bottom:10px;"
-/>
+    <br />
 
-<br>
+    <textarea
+      id="letterInput"
+      placeholder="เขียนถึงกันตรงนี้..."
+      style="
+        width: 80%;
+        max-width: 400px;
+        height: 110px;
+        border-radius: 20px;
+        padding: 12px;
+        border: none;
+      "
+    ></textarea>
 
-<textarea 
-  id="letterInput" 
-  placeholder="เขียนถึงกันตรงนี้..." 
-  style="width:80%;max-width:400px;height:110px;border-radius:20px;padding:12px;border:none;"
-></textarea>
+    <br />
+    <button onclick="saveLetter()">บันทึก 💖</button>
 
-<br>
-<button onclick="saveLetter()">บันทึก 💖</button>
+    <div id="letters" style="margin-top: 25px"></div>
 
-<div id="letters" style="margin-top:25px;"></div>
+    <h2 style="color: white; margin-top: 40px">🎮 เกมคำถามรัก</h2>
 
-<script>
-document.addEventListener("click", function () {
-  const music = document.getElementById("bgMusic");
-  music.volume = 0.2;
-  music.play();
-}, { once: true });
+    <div
+      id="quizBox"
+      style="
+        background: white;
+        padding: 20px;
+        border-radius: 25px;
+        max-width: 420px;
+        margin: 20px auto;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      "
+    >
+      <h3 id="questionText" style="color: #ff4da6"></h3>
 
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "💖";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = 20 + Math.random() * 30 + "px";
-  heart.style.animation =
-    "floatUp " + (3 + Math.random() * 2) + "s linear forwards";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 5000);
-}
-setInterval(createHeart, 300);
+      <div id="answers"></div>
 
-const supabaseClient = window.supabase.createClient(
-  "https://dmmkzwkeyqgmzxrvecsf.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtbWt6d2tleXFnbXp4cnZlY3NmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxNzEyMTksImV4cCI6MjA4Nzc0NzIxOX0.KRLWdM03L5ygXxN9Zay8rH9qtarHBxTF_Fgv8UOS8Ls"
-);
+      <p id="quizResult" style="margin-top: 15px; font-weight: bold"></p>
+    </div>
 
-const startDate = new Date(2025, 7, 22);
+    <script>
+      document.addEventListener(
+        "click",
+        function () {
+          const music = document.getElementById("bgMusic");
+          music.volume = 0.2;
+          music.play();
+        },
+        { once: true },
+      );
 
-function calculateLove() {
-  const today = new Date();
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = 20 + Math.random() * 30 + "px";
+        heart.style.animation =
+          "floatUp " + (3 + Math.random() * 2) + "s linear forwards";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+      setInterval(createHeart, 300);
 
-  let years = today.getFullYear() - startDate.getFullYear();
-  let months = today.getMonth() - startDate.getMonth();
-  let days = today.getDate() - startDate.getDate();
+      const supabaseClient = window.supabase.createClient(
+        "https://dmmkzwkeyqgmzxrvecsf.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtbWt6d2tleXFnbXp4cnZlY3NmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxNzEyMTksImV4cCI6MjA4Nzc0NzIxOX0.KRLWdM03L5ygXxN9Zay8rH9qtarHBxTF_Fgv8UOS8Ls",
+      );
 
-  if (days < 0) {
-    months--;
-    const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-    days += prevMonth.getDate();
-  }
+      const startDate = new Date(2025, 7, 22);
 
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
+      function calculateLove() {
+        const today = new Date();
 
-  document.getElementById("loveDuration").innerText =
-    `💖 เราคบกันมา ${years} ปี ${months} เดือน ${days} วัน 💖`;
+        let years = today.getFullYear() - startDate.getFullYear();
+        let months = today.getMonth() - startDate.getMonth();
+        let days = today.getDate() - startDate.getDate();
 
-  const nextAnniversary = new Date(
-    today.getFullYear(),
-    startDate.getMonth(),
-    startDate.getDate()
-  );
+        if (days < 0) {
+          months--;
+          const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+          days += prevMonth.getDate();
+        }
 
-  if (today > nextAnniversary) {
-    nextAnniversary.setFullYear(today.getFullYear() + 1);
-  }
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
 
-  const diffTime = nextAnniversary - today;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        document.getElementById("loveDuration").innerText =
+          `💖 เราคบกันมา ${years} ปี ${months} เดือน ${days} วัน 💖`;
 
-  document.getElementById("anniversaryCountdown").innerText =
-    `🎉 อีก ${diffDays} วัน จะครบรอบปีถัดไป 🎉`;
-}
+        const nextAnniversary = new Date(
+          today.getFullYear(),
+          startDate.getMonth(),
+          startDate.getDate(),
+        );
 
-calculateLove();
+        if (today > nextAnniversary) {
+          nextAnniversary.setFullYear(today.getFullYear() + 1);
+        }
 
-async function uploadImage() {
-  const file = document.getElementById("fileInput").files[0];
-  if (!file) return alert("เลือกรูปก่อน 💗");
+        const diffTime = nextAnniversary - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  const cleanName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "");
-  const filePath = `public/${Date.now()}-${cleanName}`;
+        document.getElementById("anniversaryCountdown").innerText =
+          `🎉 อีก ${diffDays} วัน จะครบรอบปีถัดไป 🎉`;
+      }
 
-  const { error } = await supabaseClient.storage
-    .from("love-images")
-    .upload(filePath, file);
+      calculateLove();
 
-  if (error) {
-    console.log(error);
-    return alert("อัปโหลดไม่สำเร็จ 😢");
-  }
+      async function uploadImage() {
+        const file = document.getElementById("fileInput").files[0];
+        if (!file) return alert("เลือกรูปก่อน 💗");
 
-  loadImages();
-}
+        const cleanName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "");
+        const filePath = `public/${Date.now()}-${cleanName}`;
 
-async function loadImages() {
-  const { data, error } = await supabaseClient.storage
-    .from("love-images")
-    .list("public", { limit: 100 });
+        const { error } = await supabaseClient.storage
+          .from("love-images")
+          .upload(filePath, file);
 
-  if (error) return console.log(error);
+        if (error) {
+          console.log(error);
+          return alert("อัปโหลดไม่สำเร็จ 😢");
+        }
 
-  const gallery = document.getElementById("gallery");
-  gallery.innerHTML = "";
-
-  data.forEach(file => {
-
-    const { data: urlData } = supabaseClient.storage
-      .from("love-images")
-      .getPublicUrl(`public/${file.name}`);
-
-    const container = document.createElement("div");
-    container.className = "image-container";
-
-    const img = document.createElement("img");
-    img.src = urlData.publicUrl;
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.className = "delete-btn";
-    deleteBtn.innerHTML = "X";
-
-    deleteBtn.onclick = async () => {
-      if (!confirm("ลบรูปนี้จริงไหม?")) return;
-
-      const { error } = await supabaseClient.storage
-        .from("love-images")
-        .remove([`public/${file.name}`]);
-
-      if (error) {
-        console.log(error);
-        alert("ลบไม่สำเร็จ 😢");
-      } else {
         loadImages();
       }
-    };
 
-    container.appendChild(img);
-    container.appendChild(deleteBtn);
-    gallery.appendChild(container);
-  });
-}
+      async function loadImages() {
+        const { data, error } = await supabaseClient.storage
+          .from("love-images")
+          .list("public", { limit: 100 });
 
-async function saveLetter() {
-  const message = document.getElementById("letterInput").value.trim();
-  const author = document.getElementById("authorInput").value.trim();
+        if (error) return console.log(error);
 
-  if (!author) return alert("ใส่ชื่อก่อน 💗");
-  if (!message) return alert("เขียนก่อน 💗");
+        const gallery = document.getElementById("gallery");
+        gallery.innerHTML = "";
 
-  const { error } = await supabaseClient
-    .from("love_letters")
-    .insert([{ message, author }]);
+        data.forEach((file) => {
+          const { data: urlData } = supabaseClient.storage
+            .from("love-images")
+            .getPublicUrl(`public/${file.name}`);
 
-  if (error) {
-    console.log(error);
-    return alert("บันทึกไม่สำเร็จ 😢");
-  }
+          const container = document.createElement("div");
+          container.className = "image-container";
 
-  document.getElementById("letterInput").value = "";
-  loadLetters();
-}
+          const img = document.createElement("img");
+          img.src = urlData.publicUrl;
 
-async function deleteLetter(id) {
-  if (!confirm("ลบจดหมายนี้จริงไหม?")) return;
+          const deleteBtn = document.createElement("button");
+          deleteBtn.className = "delete-btn";
+          deleteBtn.innerHTML = "X";
 
-  const { error } = await supabaseClient
-    .from("love_letters")
-    .delete()
-    .eq("id", id);
+          deleteBtn.onclick = async () => {
+            if (!confirm("ลบรูปนี้จริงไหม?")) return;
 
-  if (error) {
-    console.log(error);
-    alert("ลบไม่สำเร็จ 😢");
-  } else {
-    loadLetters();
-  }
-}
+            const { error } = await supabaseClient.storage
+              .from("love-images")
+              .remove([`public/${file.name}`]);
 
-async function loadLetters() {
-  const { data, error } = await supabaseClient
-    .from("love_letters")
-    .select("*")
-    .order("created_at", { ascending: false });
+            if (error) {
+              console.log(error);
+              alert("ลบไม่สำเร็จ 😢");
+            } else {
+              loadImages();
+            }
+          };
 
-  if (error) return console.log(error);
+          container.appendChild(img);
+          container.appendChild(deleteBtn);
+          gallery.appendChild(container);
+        });
+      }
 
-  const container = document.getElementById("letters");
-  container.innerHTML = "";
+      async function saveLetter() {
+        const message = document.getElementById("letterInput").value.trim();
+        const author = document.getElementById("authorInput").value.trim();
 
-  data.forEach(letter => {
-    const div = document.createElement("div");
-    div.style.background = "white";
-    div.style.margin = "15px auto";
-    div.style.padding = "18px";
-    div.style.borderRadius = "25px";
-    div.style.maxWidth = "420px";
-    div.style.position = "relative";
-    div.style.boxShadow = "0 5px 15px rgba(0,0,0,0.2)";
+        if (!author) return alert("ใส่ชื่อก่อน 💗");
+        if (!message) return alert("เขียนก่อน 💗");
 
-    div.innerHTML = `
+        const { error } = await supabaseClient
+          .from("love_letters")
+          .insert([{ message, author }]);
+
+        if (error) {
+          console.log(error);
+          return alert("บันทึกไม่สำเร็จ 😢");
+        }
+
+        document.getElementById("letterInput").value = "";
+        loadLetters();
+      }
+
+      async function deleteLetter(id) {
+        if (!confirm("ลบจดหมายนี้จริงไหม?")) return;
+
+        const { error } = await supabaseClient
+          .from("love_letters")
+          .delete()
+          .eq("id", id);
+
+        if (error) {
+          console.log(error);
+          alert("ลบไม่สำเร็จ 😢");
+        } else {
+          loadLetters();
+        }
+      }
+
+      async function loadLetters() {
+        const { data, error } = await supabaseClient
+          .from("love_letters")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) return console.log(error);
+
+        const container = document.getElementById("letters");
+        container.innerHTML = "";
+
+        data.forEach((letter) => {
+          const div = document.createElement("div");
+          div.style.background = "white";
+          div.style.margin = "15px auto";
+          div.style.padding = "18px";
+          div.style.borderRadius = "25px";
+          div.style.maxWidth = "420px";
+          div.style.position = "relative";
+          div.style.boxShadow = "0 5px 15px rgba(0,0,0,0.2)";
+
+          div.innerHTML = `
       <strong style="color:#ff4da6;font-size:18px;">
         ${letter.author}
       </strong>
@@ -349,7 +412,14 @@ async function loadLetters() {
         ${letter.message}
       </p>
       <small style="color:gray;">
-        ${new Date(letter.created_at).toLocaleString()}
+        ${new Date(letter.created_at).toLocaleString("th-TH", {
+          timeZone: "Asia/Bangkok",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        })}
       </small>
       <button 
         onclick="deleteLetter(${letter.id})"
@@ -369,13 +439,97 @@ async function loadLetters() {
       >X</button>
     `;
 
-    container.appendChild(div);
-  });
-}
+          container.appendChild(div);
+        });
+      }
 
-loadImages();
-loadLetters();
-</script>
+      loadImages();
+      loadLetters();
 
-</body>
+      // 🎮 คำถาม
+      const quizData = [
+        {
+          question: "เราคบกันวันไหน?",
+          answers: ["1 ม.ค.", "14 ก.พ.", "22 ส.ค."],
+          correct: 2,
+        },
+        {
+          question: "ใครงอนเก่งกว่า?",
+          answers: ["เธอ", "เรา", "ทั้งคู่"],
+          correct: 0,
+        },
+        {
+          question: "รักมากแค่ไหน?",
+          answers: ["นิดเดียว", "มาก", "มากที่สุดในโลก"],
+          correct: 2,
+        },
+      ];
+
+      let currentQuestion = 0;
+
+      function loadQuestion() {
+        const q = quizData[currentQuestion];
+
+        document.getElementById("questionText").innerText = q.question;
+
+        const answersDiv = document.getElementById("answers");
+        answersDiv.innerHTML = "";
+
+        q.answers.forEach((answer, index) => {
+          const btn = document.createElement("button");
+          btn.innerText = answer;
+          btn.style.display = "block";
+          btn.style.margin = "10px auto";
+          btn.style.padding = "10px 20px";
+          btn.style.borderRadius = "20px";
+          btn.style.border = "none";
+          btn.style.background = "#ff99cc";
+          btn.style.color = "white";
+          btn.style.cursor = "pointer";
+
+          btn.onclick = () => checkAnswer(index);
+
+          answersDiv.appendChild(btn);
+        });
+
+        document.getElementById("quizResult").innerText = "";
+      }
+
+      function checkAnswer(index) {
+        const result = document.getElementById("quizResult");
+
+        if (index === quizData[currentQuestion].correct) {
+          result.innerText = "ถูกต้องงงง 💖";
+          result.style.color = "green";
+          bounceEffect();
+        } else {
+          result.innerText = "ผิดนะะะ 😝";
+          result.style.color = "red";
+        }
+
+        setTimeout(() => {
+          currentQuestion++;
+          if (currentQuestion < quizData.length) {
+            loadQuestion();
+          } else {
+            document.getElementById("quizBox").innerHTML =
+              "<h3 style='color:#ff4da6;'>เล่นจบแล้ว 💘 เก่งมากเลย</h3>";
+          }
+        }, 1500);
+      }
+
+      // 💥 เอฟเฟกต์เด้ง
+      function bounceEffect() {
+        const box = document.getElementById("quizBox");
+        box.style.transform = "scale(1.1)";
+        box.style.transition = "0.3s";
+
+        setTimeout(() => {
+          box.style.transform = "scale(1)";
+        }, 300);
+      }
+
+      loadQuestion();
+    </script>
+  </body>
 </html>
