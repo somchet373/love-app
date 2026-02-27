@@ -241,6 +241,8 @@ async function uploadImage() {
   const file = document.getElementById("fileInput").files[0];
   if (!file) return alert("เลือกรูปก่อน 💗");
 
+  const cleanName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "");
+
   const filePath = `public/${Date.now()}-${file.name}`;
 
   const { error } = await supabaseClient.storage
