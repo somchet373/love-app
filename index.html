@@ -140,6 +140,54 @@
     </style>
   </head>
 
+  <div
+    id="lockScreen"
+    style="
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #ff99cc, #ff4da6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: white;
+      text-align: center;
+    "
+  >
+    <h2>💖 ใส่รหัสลับก่อนเข้า 💖</h2>
+
+    <input
+      id="secretInput"
+      type="password"
+      placeholder="รหัสลับ..."
+      style="
+        padding: 12px 20px;
+        border-radius: 30px;
+        border: none;
+        margin-top: 15px;
+      "
+    />
+
+    <button
+      onclick="checkSecret()"
+      style="
+        margin-top: 15px;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 25px;
+        background: white;
+        color: #ff4da6;
+        font-weight: bold;
+        cursor: pointer;
+      "
+    >
+      เข้าเลย
+    </button>
+
+    <p id="lockMsg" style="margin-top: 10px"></p>
+  </div>
+
   <body>
     <audio id="bgMusic" loop>
       <source src="love.mp3" type="audio/mpeg" />
@@ -209,6 +257,35 @@
       <div id="answers"></div>
 
       <p id="quizResult" style="margin-top: 15px; font-weight: bold"></p>
+    </div>
+
+    <h2 style="color: white; margin-top: 40px">🎁 วันนี้รักแค่ไหน?</h2>
+
+    <div style="text-align: center; margin: 20px">
+      <button
+        onclick="randomLove()"
+        style="
+          padding: 12px 30px;
+          border: none;
+          border-radius: 30px;
+          background: #ff4da6;
+          color: white;
+          font-size: 16px;
+          cursor: pointer;
+        "
+      >
+        สุ่มเลย 💖
+      </button>
+
+      <p
+        id="loveResult"
+        style="
+          margin-top: 20px;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
+        "
+      ></p>
     </div>
 
     <script>
@@ -455,8 +532,8 @@
         },
         {
           question: "ใครงอนเก่งกว่า?",
-          answers: ["เธอ", "เรา", "ทั้งคู่"],
-          correct: 0,
+          answers: ["เธอ", "เค้า", "ทั้งคู่"],
+          correct: 2,
         },
         {
           question: "รักมากแค่ไหน?",
@@ -530,6 +607,34 @@
       }
 
       loadQuestion();
+
+      const SECRET_CODE = "22082568"; // 👈 เปลี่ยนรหัสได้
+
+      function checkSecret() {
+        const val = document.getElementById("secretInput").value;
+        if (val === SECRET_CODE) {
+          document.getElementById("lockScreen").style.display = "none";
+        } else {
+          document.getElementById("lockMsg").innerText = "ผิดนะะะ 😝";
+        }
+      }
+
+      const loveMessages = [
+        "รักมากกว่าข้าวอีก 🍚💖",
+        "วันนี้คิดถึงทั้งวันเลยนะ",
+        "ถ้าไม่มีเธอ เราจะงอแงใส่ใคร",
+        "รักแบบไม่เผื่อใจแล้วนะ",
+        "อยากกอดทั้งวันเลย",
+        "เธอคือ safe zone ของเรา",
+        "รักแบบไม่พักเลย 💕",
+        "ถ้าวันไหนงอนก็ยังรักเหมือนเดิม",
+      ];
+
+      function randomLove() {
+        const random =
+          loveMessages[Math.floor(Math.random() * loveMessages.length)];
+        document.getElementById("loveResult").innerText = random;
+      }
     </script>
   </body>
 </html>
